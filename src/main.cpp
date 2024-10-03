@@ -2,35 +2,38 @@
 #include"solver.hpp"
 #include<iostream>
 #include<fstream>
+#include <iomanip>  
+#include <fstream>  
+#include <string>
+#include<cmath>
 template <typename T>
-void boundary_conditions(std::vector<std::vector<T>> &field){
+void boundary_conditions(std::vector<T> &field){
     // current_field(n, std::vector<int>(n, 0))
-    T step = 0;
-    T max_val{100.0}; 
-    T n_steps = field.size(); // Number of steps 
-    T step_size = max_val/(n_steps-1); // Step size, -1 to include 100.
-    for(size_t i = 0; i < field.size(); i++) // Iterate over the rows 
-    {  
-        field[i][0] = step; // Update the value of the field.
-        field[field.size()-1][i]=max_val; 
-        step += step_size; // Update the value for next field.
-        max_val -= step_size; 
-    }   
-    for (size_t i = 0; i < field.size()-1; i++)
+    auto n = std::sqrt(field.size());
+    T step = 0; // Initial step 
+    T max_val{100.0}; // maximum value of the oundary condditions
+    T n_steps = field.size(); // Total numbr of steps 
+    T step_size = max_val / (n-1); // Step size 
+    for (size_t i = 0; i < n; i++)
     {
-        field[0][i+1] = 0;
-        
-        field[i+1][field.size()-1] = 0;
+        field[i*n] = step; // Updating the left side of the grid field values 
+        field[i] = 0; // Updating the upper grid field values.
+        step += step_size; // incremenet the step.
     }
-    
+    for (size_t i = 0; i < n; i++)
+    {
+        step -= step_size; 
+        field[i+n*(n-1)] = step; // Update the values of the field at the right side of the mesh
+        field[i*n+n-1] = 0; // Update the values of the fieldd in at the down side of the mesh..
+        }   
 }
 
 int main(){
-    int n = 10;
+    int n = 100;
+    int max_steps = 1000000;  
+    int print_interval = 1000;
     Mesh<float> mesh(n, boundary_conditions<float>);
-    std::ofstream file;  
-    file.open("data.dat");
-    std::cout<<mesh<<std::endl;
-    file<<mesh<<std::endl;
+    Solver<float> solver;
+    solver.jacobi(mesh, max_steps, print_interval);
     return 0;
 }
