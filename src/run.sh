@@ -1,4 +1,5 @@
 #!/bin/bash
+make clean 
 make 
 ./mesh.x
-make clean 
+gnuplot "../gif/heat_map.gp"

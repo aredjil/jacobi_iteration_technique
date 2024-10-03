@@ -1,14 +1,14 @@
 set terminal gif animate delay 5  # Set the terminal to animated GIF with 5 ms delay between frames
 set output 'jacobi.gif'           # Set the output file for the GIF
-
+set title "Laplace Equation solution using Jacobi Iteration Technique"
 set size square                   # Ensure square aspect ratio for the plots
 unset colorbox                    # Hide the color bar
 set palette rgb 33,13,10          # Use a custom color palette
 set yrange [] reverse             # Reverse the y-axis so that the image is not flipped
 
 # Loop over the files and plot each one
-do for [i=1:1000] {                # Assuming 100 files named like file_001.txt, file_002.txt, etc.
-    file = sprintf('file_0%d.dat', i)  # Format the file name with leading zeros
+do for [i=1:2000] {                # Assuming 100 files named like file_001.txt, file_002.txt, etc.
+    file = sprintf('../gif/file_%03d.dat', i)  # Format the file name with leading zeros
     plot file matrix with image   # Plot the file as a matrix with an image
 }
 

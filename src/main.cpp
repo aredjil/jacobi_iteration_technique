@@ -31,7 +31,7 @@ void boundary_conditions(std::vector<T> &field){
 int main(){
     int n = 100;
     int max_steps = 10000;  
-    int print_interval = 5;
+    int print_interval = 10;
     Mesh<float> mesh(n, boundary_conditions<float>);
     Solver<float> solver;
     solver.jacobi(mesh, max_steps, print_interval);
