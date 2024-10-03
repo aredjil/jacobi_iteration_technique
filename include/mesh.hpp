@@ -38,11 +38,13 @@ class Mesh{
  */
 template <typename T>
 template <typename F>
-Mesh<T>::Mesh(size_t n, F &boundary_conditions):size(n), current_field(n*n, 0.5){
+Mesh<T>::Mesh(size_t n, F &boundary_conditions):size(n), current_field(n*n, 0.5), new_field(n*n, 0.5){
         /**
          * Set the boundary conditions.
          */
             boundary_conditions(current_field);
+            boundary_conditions(new_field);
+
 }
 /**
  * Definition of the print functionality of the mesh calss
@@ -61,3 +63,4 @@ std::ostream& operator<<(std::ostream& os, const Mesh<T>& m){
     }
     return os;
 }
+
