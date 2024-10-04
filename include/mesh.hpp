@@ -56,7 +56,6 @@ std::ostream& operator<<(std::ostream& os, const Mesh<T>& m){
     {
         for (size_t j = 0; j < m.size; j++)
         {
-            // os<<" "<< m.current_field[i][j] <<" ";
             os<<" "<<m.current_field[i*m.size+j]<<" ";
         }
         os<<std::endl;
