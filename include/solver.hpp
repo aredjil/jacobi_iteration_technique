@@ -51,6 +51,7 @@ void Solver<T>::jacobi(Mesh<T>& m, const size_t &max_steps, const size_t & print
         // Swap the current field values with the new field values before the next iteration
         m.new_field.swap(m.current_field);        
         if(k % print_interval == 0){
+        //TODO change this to be inside ifdef 
         print_results(m, counter);
         }
         
