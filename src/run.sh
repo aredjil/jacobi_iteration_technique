@@ -2,4 +2,4 @@
 make clean 
 make 
 ./mesh.x
-gnuplot "../gif/heat_map.gp"
+gnuplot "heat_map.gp"

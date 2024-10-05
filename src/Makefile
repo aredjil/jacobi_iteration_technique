@@ -1,5 +1,5 @@
 CC=g++
-FLAGS= -I../include
+FLAGS= -I../include -DPRINT
 mesh.x: main.cpp
 	$(CC) $(FLAGS) main.cpp -o $@ 
 clean:

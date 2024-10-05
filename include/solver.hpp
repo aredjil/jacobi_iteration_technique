@@ -50,9 +50,12 @@ void Solver<T>::jacobi(Mesh<T>& m, const size_t &max_steps, const size_t & print
         }
         // Swap the current field values with the new field values before the next iteration
         m.new_field.swap(m.current_field);        
+        
         if(k % print_interval == 0){
         //TODO change this to be inside ifdef 
+        #ifdef PRINT
         print_results(m, counter);
+        #endif 
         }
         
 
@@ -62,7 +65,7 @@ template <typename T>
 void Solver<T>::print_results(Mesh<T> &m, size_t &counter){
     const int width = 3;
         std::ostringstream file_name;
-        file_name << "../gif/file_" << std::setw(width) <<std::setfill('0')<< counter << ".dat";
+        file_name << "../data/file_" << std::setw(width) <<std::setfill('0')<< counter << ".dat";
         counter++;
         std::ofstream file(file_name.str());
         if (file.is_open()) {
